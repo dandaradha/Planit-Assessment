@@ -6,13 +6,13 @@ Feature: Calculate subtotal for every product
 
     Given I navigate to shop page
     When I buy below products
-      | Quantity | Product         |
-      | 2        | Stuffed Frog    |
-      | 5        | Fluffy Bunny    |
-      | 3        | Valentine Bear  |
+      | Quantity | Product         | Css_index |
+      | 2        | Stuffed Frog    | 2         |
+      | 5        | Fluffy Bunny    | 4         |
+      | 3        | Valentine Bear  | 7         |
     And I navigate to the cart page
     Then I verify the subtotal for each product is correct
-      | Quantity | Product         | price  |
-      | 2        | Stuffed Frog    | 10.99  |
-      | 5        | Fluffy Bunny    | 9.99   |
-      | 3        | Valentine Bear  | 14.99  |
+      | Quantity | Product         | Unit_Price  | Xpath_index |
+      | 2        | Stuffed Frog    | 10.99       | 1           |
+      | 5        | Fluffy Bunny    | 9.99        | 2           |
+      | 3        | Valentine Bear  | 14.99       | 3           |

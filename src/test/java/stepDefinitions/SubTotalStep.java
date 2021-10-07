@@ -44,22 +44,9 @@ public class SubTotalStep {
 
         for (List<String> columns : rows) {
             int count = Integer.parseInt(columns.get(0));
-            String product = columns.get(1);
-
+            String index = columns.get(2);
             for (int i= 0; i < count; i++){
-
-                if(product.equals("Stuffed Frog")) {
-                    driver.findElement(By.cssSelector("li:nth-of-type(2) .btn.btn-success")).click();
-
-                }
-                else if(product.equals("Fluffy Bunny")) {
-                    driver.findElement(By.cssSelector("li:nth-of-type(4) .btn.btn-success")).click();
-                }
-                else if(product.equals("Valentine Bear")) {
-                    driver.findElement(By.cssSelector("li:nth-of-type(7) .btn.btn-success")).click();
-                }
-                else
-                    break;
+                driver.findElement(By.cssSelector("li:nth-of-type("+index+") .btn.btn-success")).click();
             }
         }
     }
@@ -77,27 +64,19 @@ public class SubTotalStep {
 
         sleep(3000);
 
+
         List<List<String>> rows = table.rows(1).asLists(String.class); // skip heading row
         for (List<String> columns : rows) {
 
-            int count = Integer.parseInt(columns.get(0));
+            int quantity = Integer.parseInt(columns.get(0));
             String product = columns.get(1);
             price = Double.parseDouble(columns.get(2));
-            total = count*price;
+            String tr_index = columns.get(3);
+            total = quantity*price;
 
-            System.out.println(" Product: "+product+" and Quantity: "+count+" and total price is: $"+total);
+            System.out.println(" Product: "+product+" and Quantity: "+quantity+" and total price is: $"+total);
 
-            if(product.equals("Stuffed Frog")) {
-                Assert.assertEquals("$"+Double.toString(total),driver.findElement(By.xpath("//form[@name='form']/table/tbody/tr[1]/td[4]")).getText());
-            }
-            else if(product.equals("Fluffy Bunny")) {
-                Assert.assertEquals("$"+Double.toString(total),driver.findElement(By.xpath("//form[@name='form']/table/tbody/tr[2]/td[4]")).getText());
-            }
-            else if(product.equals("Valentine Bear")) {
-                Assert.assertEquals("$"+Double.toString(total),driver.findElement(By.xpath("//form[@name='form']/table/tbody/tr[3]/td[4]")).getText());
-            }
-            else
-                break;
+            Assert.assertEquals("$"+Double.toString(total), driver.findElement(By.xpath("//form[@name='form']/table/tbody/tr["+tr_index+"]/td[4]")).getText());
         }
         driver.close();
     }

@@ -42,7 +42,6 @@ public class AddItemsToCartStep {
         List<List<String>> rows = table.rows(1).asLists(String.class);
         for (List<String> columns : rows) {
             int count = Integer.parseInt(columns.get(0));
-            String product = columns.get(1);
             String index = columns.get(2);
 
             for (int i= 0; i < count; i++){
@@ -71,9 +70,6 @@ public class AddItemsToCartStep {
             String tr_index = columns.get(2);
             items_count = items_count+quantity;
             Assert.assertEquals(product, driver.findElement(By.xpath("//form[@name='form']/table/tbody/tr["+tr_index+"]/td[1]")).getText());
-            //Assert.assertEquals(quantity, driver.findElement(By.xpath("//form[@name='form']/table/tbody/tr["+tr_index+"]/td[3]")).getText());
-
-            System.out.println(product+" product verified");
         }
 
         String expectedMessage = "There are "+items_count+" items in your cart, you can Checkout or carry on Shopping.";

@@ -6,7 +6,7 @@ Feature: Add items to cart
 
     Given I navigate from home page to shop page
     When I click buy button
-      | Quantity | Product      | Xpath_index |
+      | Quantity | Product      | css_index   |
       | 2        | Funny Cow    | 6           |
       | 1        | Fluffy Bunny | 4           |
     And I click the cart menu
